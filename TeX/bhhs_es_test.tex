@@ -1,0 +1,34 @@
+\documentclass{standalone}
+\usepackage{amsmath}
+\usepackage{pgfplots}
+\usepackage{pgfplotstable}
+\usetikzlibrary{pgfplots.groupplots}
+\pgfplotsset{compat=1.18}
+
+\begin{document}
+
+\begin{tikzpicture}
+\begin{axis}[
+	%ylabels at = edge left,
+	%yticklabels at = edge left,
+	%horizontal sep = 15pt,
+	%xtick = {1, 2, 3, 4, 5, 6, 7},
+	%ytick = {0, 1, 2, 3, 4, 5},
+	%xlabel = {Condition Number},
+	%ylabel = {Relative Error},
+	xtick distance = 1,
+	xticklabels=\empty,
+	ytick distance = 1,
+	grid = major,
+    grid style={dashed, gray!30},
+	legend pos=outer north east,
+]
+\addplot+[mark=o, color=black, only marks] table [x=Count, y=ft, col sep=comma]{../csv_files/bhhs_es_test.csv};
+\addplot+[mark=asterisk, color=black, only marks] table [x=Count, y=Z*, col sep=comma]{../csv_files/bhhs_es_test.csv};
+\addplot+[mark=triangle, color=black, only marks] table [x=Count, y=M, col sep=comma]{../csv_files/bhhs_es_test.csv};
+\addplot+[mark=square, color=black, only marks] table [x=Count, y=Z, col sep=comma]{../csv_files/bhhs_es_test.csv};
+\legend{ft,Z*,M,Z}
+\end{axis}
+\end{tikzpicture}
+
+\end{document}
