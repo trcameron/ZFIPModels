@@ -6,11 +6,15 @@ IP models for minimum zero forcing sets, forts, and related graph parameters
 	* Mathematics Department, Penn State Behrend
 	* [Email: trc5475@psu.edu](mailto:trc5475@psu.edu)
 
+*[Jonad Pulaj](https://www.davidson.edu/people/jonad-pulaj)
+	* Mathematics and Computer Science Department, Davidson College
+	* [Email: jopulaj@davidson.edu](mailto:jopulaj@davidson.edu)
+
 ## Instructions
 Below are instructions for the installation of HornerK, the testing of Horner, and compiling of TeX figures. These instructions have been tested on macOS Sonoma 14.5.
 
 ### Installation
-First, open the make.inc file to specify the C++ compiler and flags. The default settings use the *g++* compiler with flags *-O3*. Also, the include directory and link directory for the local Gurboi installation. Once these parameters are set, the tests in the C++ folder can be installed by running *make install test_name* in the terminal. The command *make uninstall* can be used to remove all executable files. 
+First, open the make.inc file to specify the C++ compiler and flags. The default settings use the *g++* compiler with flags *-O3*. Also, the include directory and link directory for the local Gurobi installation. Once these parameters are set, the tests in the C++ folder can be installed by running *make install test_name* in the terminal. The command *make uninstall* can be used to remove all executable files. 
 
 ### smallg test
 The smallg test takes arguments order and option and uses them in a Nauty geng call, which produces all non-isomorphic graphs of a certain order. The order refers to the number of vertices in the graph, while the option is specific to the geng function. For example, the option of -g causes all graphs to be outputted from Nauty in the graph6 format, which is expected by the smallg test. The option of mine:maxe would only outpute graphs where the number of edges is between mine and maxe. 
