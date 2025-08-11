@@ -9,9 +9,6 @@ graph: graph.hpp graph.cpp
 ip_models: graph.hpp graph.cpp ip_models.hpp ip_models.cpp
 	$(CPP) $(CARGS) -o ip_models graph.cpp ip_models.cpp $(INC) $(LIB)
 
-qp_models: graph.hpp graph.cpp ip_models.hpp ip_models.cpp lin_alg.hpp lin_alg.cpp qp_models.hpp qp_models.cpp
-	$(CPP) $(CARGS) -o qp_models graph.cpp ip_models.cpp lin_alg.cpp qp_models.cpp $(INC) $(LIB)
-
 testing: testing.hpp testing.cpp
 	$(CPP) $(CARGS) -o testing testing.cpp $(INC) $(LIB)
 
