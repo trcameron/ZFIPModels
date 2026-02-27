@@ -42,9 +42,14 @@ The bhhs test computes the zero forcing number, fractional zero forcing number, 
 ### bhhs_vs_test
 The bhhs vs test computes the zero forcing number, fractional zero forcing number, and fort number for 49 random vertex sums of bhhs graphs. 
 
-For each generated graph, the maximum nullity is computed using vertex sum formulas for minimum rank. The maximum nullity can be compared to the fort number and fractional zero forcing number to see that these values are lower bounds. The results are documented in a casv file, which is located in the csv_files folder. In addition, the TeX folder has code for visualizing this data. 
+For each generated graph, the maximum nullity is computed using vertex sum formulas for minimum rank. The maximum nullity can be compared to the fort number and fractional zero forcing number to see that these values are lower bounds. The results are documented in a csv file, which is located in the csv_files folder. In addition, the TeX folder has code for visualizing this data. 
 
 ### bhhs_es_test
 The bhhs vs test computes the zero forcing number, fractional zero forcing number, and fort number for 49 random edge sums of bhhs graphs.
 
-For each generated graph, the maximum nullity is computed using edge sum formulas for minimum rank. The maximum nullity can be compared to the fort number and fractional zero forcing number to see that these values are lower bounds. The results are documented in a casv file, which is located in the csv_files folder. In addition, the TeX folder has code for visualizing this data.
+For each generated graph, the maximum nullity is computed using edge sum formulas for minimum rank. The maximum nullity can be compared to the fort number and fractional zero forcing number to see that these values are lower bounds. The results are documented in a csv file, which is located in the csv_files folder. In addition, the TeX folder has code for visualizing this data.
+
+### spider_test
+The spider test computes all spiders with leg lengths at most 5 with order between 4 and 31.
+
+For each spider, all minimal forts are computed and the number of minimal forts for each graph is saved to a csv file, which is located in the csv_files folder. In addition, the TeX folder has code for visualizing this data. 

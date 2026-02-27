@@ -1,0 +1,106 @@
+\documentclass[border=2pt]{standalone}
+\usepackage{pgfplots}
+\usepackage{pgfplotstable}
+\pgfplotsset{compat=1.18}
+
+\begin{document}
+
+% Load CSV file.
+% If your file is tab-separated, change col sep=tab.
+\pgfplotstableread[
+  col sep=comma,
+  trim cells=true
+]{../csv_files/spider_test.csv}\datatable
+
+% Sort by order so we can scan groups
+\pgfplotstablesort[sort key=order]{\datatable}{\datatable}
+
+% Number of rows in the data table
+\pgfplotstablegetrowsof{\datatable}
+\pgfmathtruncatemacro{\N}{\pgfplotsretval}
+
+\begin{tikzpicture}
+\begin{axis}[
+  axis on top=false,
+  scale only axis,
+  width=16cm,
+  height=9cm,
+  xmin=4, xmax=31,
+  restrict x to domain*=4:31,
+  xlabel={Order $n$},
+  ylabel={Number of Minimal forts (range)},
+  xtick={4,5,...,31},
+  ymajorgrids=true,
+  enlarge x limits=0.02,
+  ymin=0,
+  clip=true
+]
+
+% --- Overlay conjectured bound y = n/2 ---
+\addplot[domain=4:31, samples=2, black, dashed, line width=0.9pt] {x/2};
+\addlegendentry{$y=\frac{n}{2}$}
+
+% Track current order and its running min/max
+\def\curorder{}%
+\def\curmin{}%
+\def\curmax{}%
+
+\newcount\i
+\i=0
+
+\loop\ifnum\i<\N
+  \pgfplotstablegetelem{\the\i}{order}\of{\datatable}
+  \edef\thisorder{\pgfplotsretval}
+  \pgfplotstablegetelem{\the\i}{minforts}\of{\datatable}
+  \edef\thisfort{\pgfplotsretval}
+
+  % Initialize on first row (robust test: curorder is empty token list)
+  \ifx\curorder\relax
+    % not used
+  \fi
+  \ifx\curorder\empty
+    % This branch is unreliable; do not use.
+  \fi
+  \ifx\curorder\@empty
+    % not available here; avoid.
+  \fi
+
+  % Robust "first row" test: compare to \relax sentinel
+  \ifx\curorder\relax
+  \fi
+
+  % Instead: use a separate flag
+  \ifnum\i=0
+    \edef\curorder{\thisorder}%
+    \edef\curmin{\thisfort}%
+    \edef\curmax{\thisfort}%
+  \else
+    \ifx\thisorder\curorder
+      \pgfmathparse{min(\curmin,\thisfort)}\edef\curmin{\pgfmathresult}%
+      \pgfmathparse{max(\curmax,\thisfort)}\edef\curmax{\pgfmathresult}%
+    \else
+      % Draw completed group's range segment
+      \addplot[black, line width=1.5pt] coordinates {(\curorder,\curmin) (\curorder,\curmax)};
+      % End ticks
+      \addplot[only marks, mark=-, mark size=4pt] coordinates {(\curorder,\curmin)};
+      \addplot[only marks, mark=-, mark size=4pt] coordinates {(\curorder,\curmax)};
+
+      % Reset for new order
+      \edef\curorder{\thisorder}%
+      \edef\curmin{\thisfort}%
+      \edef\curmax{\thisfort}%
+    \fi
+  \fi
+
+  \advance\i by 1
+\repeat
+
+% Draw final group's range
+\addplot[black, thick] coordinates {(\curorder,\curmin) (\curorder,\curmax)};
+\addplot[only marks, mark=-, mark size=4pt] coordinates {(\curorder,\curmin)};
+\addplot[only marks, mark=-, mark size=4pt] coordinates {(\curorder,\curmax)};
+
+\end{axis}
+\end{tikzpicture}
+
+\end{document}

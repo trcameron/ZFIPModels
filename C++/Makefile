@@ -32,6 +32,9 @@ tree_fort_test: graph.hpp graph.cpp ip_models.hpp ip_models.cpp testing.hpp test
 
 hypercube_ptinterval_test: graph.hpp graph.cpp ip_models.hpp ip_models.cpp hypercube_ptinterval_test.cpp
 	$(CPP) $(CARGS) -o hypercube_ptinterval_test graph.cpp ip_models.cpp hypercube_ptinterval_test.cpp $(INC) $(LIB)
+
+spider_test: graph.hpp graph.cpp ip_models.hpp ip_models.cpp spider_test.cpp
+	$(CPP) $(CARGS) -o spider_test graph.cpp ip_models.cpp spider_test.cpp $(INC) $(LIB)
 	
 uninstall:
 	@rm -f graph
@@ -44,3 +47,4 @@ uninstall:
 	@rm -f bhhs_es_test
 	@rm -f tree_fort_test
 	@rm -f hypercube_ptinterval_test
+	@rm -f spider_test
